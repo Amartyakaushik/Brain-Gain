@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.SpinFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/name_plate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dp" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Amartya Kaushik"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/withdrawal_coin"
+                android:layout_width="26dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:src="@drawable/coin" />
+
+            <TextView
+                android:id="@+id/withdrawal_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/chance_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Chance Left: "
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/name_plate"
+            app:layout_constraintStart_toStartOf="@+id/name_plate"
+            app:layout_constraintTop_toBottomOf="@+id/name_plate" />
+
+        <TextView
+            android:id="@+id/chance_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:fontFamily="monospace"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/chance_text"
+            app:layout_constraintStart_toEndOf="@+id/chance_text"
+            app:layout_constraintTop_toTopOf="@+id/chance_text" />
+
+        <ImageView
+            android:id="@+id/spinner_bg"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/spin_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chance_text" />
+
+        <ImageView
+            android:id="@+id/spinner_wheel"
+            android:layout_width="229dp"
+            android:layout_height="229dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/spinner_wheel"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_bg"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_bg"
+            app:layout_constraintStart_toStartOf="@+id/spinner_bg"
+            app:layout_constraintTop_toTopOf="@id/spinner_bg"
+            app:layout_constraintVertical_bias="0.233" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/spinner"
+            android:layout_width="24dp"
+            android:layout_height="40dp"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintVertical_bias="0.47"
+            android:background="@drawable/pin"
+            app:cornerRadius="300dp"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_wheel"
+            app:layout_constraintEnd_toEndOf="@+id/spinner_wheel"
+            app:layout_constraintStart_toStartOf="@+id/spinner_wheel"
+            app:layout_constraintTop_toTopOf="@id/spinner_wheel"/>
+
+
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="12dp"-->
+<!--        app:layout_constraintHorizontal_bias="0.49"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/spin_btn"
+            android:layout_width="150dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="110dp"
+            android:backgroundTint="@color/light_gray"
+            android:text="Spin"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="9dp"
+            app:layout_constraintEnd_toEndOf="@id/spinner_wheel"
+            app:layout_constraintStart_toStartOf="@id/spinner_wheel"
+            app:layout_constraintTop_toBottomOf="@id/spinner_wheel" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

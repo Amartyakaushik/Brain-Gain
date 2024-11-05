@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "707100274789",
+    "project_id": "braingain-43c97",
+    "storage_bucket": "braingain-43c97.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707100274789:android:befe7c26890918f431968c",
+        "android_client_info": {
+          "package_name": "com.example.braingain"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmPan0KHVVhHHEXu6jQkcg3g0zmV1zbyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

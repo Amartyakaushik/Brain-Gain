@@ -32,10 +32,6 @@ class HistoryFragment : Fragment() {
 //        historyDataList.add(historyModelClass("01:45","$6100"))
 //        historyDataList.add(historyModelClass("02:12","$1300"))
 //        historyDataList.add(historyModelClass("12:32","$100"))
-//        historyDataList.add(historyModelClass("08:42","$900"))
-//        historyDataList.add(historyModelClass("10:53","$300"))
-//        historyDataList.add(historyModelClass("01:45","$6100"))
-//        historyDataList.add(historyModelClass("02:12","$1300"))
         FirebaseDatabase.getInstance().reference.child("PlayerAccountHistory").child(FirebaseAuth.getInstance().uid!!)
             .addValueEventListener(
                 object : ValueEventListener{

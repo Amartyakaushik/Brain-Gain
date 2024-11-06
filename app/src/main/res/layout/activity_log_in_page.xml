@@ -75,21 +75,23 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="140dp"
+            android:textColor="@color/hint_color"
             android:background="@drawable/edit_text_bg_log_in"
             android:hint="Email"
             android:paddingStart="10dp"
-            android:textColorHint="@color/hint_color" />
+            android:textColorHint="#880E0B0B" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
+            android:textColor="@color/hint_color"
             android:background="@drawable/edit_text_bg_log_in"
             android:hint="Password"
             android:inputType="textPassword"
             android:paddingStart="10dp"
-            android:textColorHint="@color/hint_color" />
+            android:textColorHint="#880E0B0B" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/logInBtn"

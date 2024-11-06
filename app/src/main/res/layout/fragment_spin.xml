@@ -123,17 +123,17 @@
 <!--        android:layout_width="20dp"-->
 <!--        android:layout_height="12dp"-->
 <!--        app:layout_constraintHorizontal_bias="0.49"-->
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/spin_btn"
             android:layout_width="150dp"
             android:layout_height="58dp"
             android:layout_marginTop="110dp"
-            android:backgroundTint="@color/light_gray"
             android:text="Spin"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             app:cornerRadius="9dp"
+            android:background="@drawable/btn_custom_bk"
             app:layout_constraintEnd_toEndOf="@id/spinner_wheel"
             app:layout_constraintStart_toStartOf="@id/spinner_wheel"
             app:layout_constraintTop_toBottomOf="@id/spinner_wheel" />

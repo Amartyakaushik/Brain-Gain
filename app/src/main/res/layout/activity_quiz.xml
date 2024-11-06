@@ -7,6 +7,22 @@
     android:background="@drawable/layout_background"
     tools:context=".QuizActivity">
 
+<!--    <FrameLayout-->
+<!--        android:id="@+id/spin_containter"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+
+
+
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/name_plate"
@@ -66,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/question_asked"
+        android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/category_img"
@@ -79,11 +95,24 @@
         app:layout_constraintStart_toStartOf="@id/category_img"
         app:layout_constraintEnd_toEndOf="@id/category_img"/>
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/question_asked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        android:text="What is your name ?"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="@id/question"
+        app:layout_constraintEnd_toEndOf="@id/question"/>
+    <TextView
+        android:id="@+id/tv_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/question_asked"
-        android:text="What is your name ?"
+        android:text="Select one of these"
         android:textSize="18sp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_regular"
@@ -91,19 +120,6 @@
         android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="@id/question_asked"
         app:layout_constraintEnd_toEndOf="@id/question_asked"/>
-    <TextView
-        android:id="@+id/tv_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"
-        android:text="Select one of these"
-        android:textSize="18sp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/white"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintEnd_toEndOf="@id/tv_name"/>
 
     <LinearLayout
         android:id="@+id/layout_option"
@@ -118,7 +134,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option1"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="Option 1"
             android:textSize="18sp"
             android:textColor="@color/white"
@@ -128,7 +144,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option2"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="Option 2"
             android:textSize="18sp"
             android:textColor="@color/white"
@@ -138,7 +154,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option3"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="Option 3"
             android:textSize="18sp"
             android:textColor="@color/white"
@@ -148,8 +164,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/option4"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="3dp"
             android:text="Option 4"
+            android:layout_gravity="center"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_bold"
@@ -171,7 +189,8 @@
 <!--            android:layout_marginHorizontal="30dp"/>-->
 
 <!--    this view is to show as result when user reach to the end of the questions-->
-
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </FrameLayout>-->
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/won_anim"

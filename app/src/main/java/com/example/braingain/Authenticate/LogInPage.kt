@@ -49,6 +49,7 @@ class LogInPage : AppCompatActivity() {
         }
     }
 
+
     override fun onStart() {
         super.onStart()
         if(FirebaseAuth.getInstance().currentUser != null){

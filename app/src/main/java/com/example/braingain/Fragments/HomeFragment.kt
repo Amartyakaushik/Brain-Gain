@@ -35,6 +35,8 @@ class HomeFragment : Fragment() {
         categoryList.add(cateogoryModelClass(R.drawable.english,"english"))
         categoryList.add(cateogoryModelClass(R.drawable.history,"history"))
         categoryList.add(cateogoryModelClass(R.drawable.law,"law"))
+        categoryList.add(cateogoryModelClass(R.drawable.android,"android"))
+        categoryList.add(cateogoryModelClass(R.drawable.dsa,"dataStructure"))
     }
 
     override fun onCreateView(

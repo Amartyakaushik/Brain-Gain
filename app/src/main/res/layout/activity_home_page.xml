@@ -28,9 +28,9 @@
         android:layout_height="77dp"
         app:menu="@menu/bottom_nav_list"
         app:itemIconTint="@color/icons_color"
-        app:itemTextColor="@color/icons_color"
+        app:itemTextColor="@color/nav_icon_text_color"
         app:itemIconSize="27dp"
-        android:background="#4B000000"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

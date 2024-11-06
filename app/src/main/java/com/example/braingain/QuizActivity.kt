@@ -1,6 +1,9 @@
 package com.example.braingain
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -72,6 +75,7 @@ class QuizActivity : AppCompatActivity() {
         val option3 = binding.option3
         val option4 = binding.option4
 
+//        catadp
         val questionType = intent.getStringExtra("questionType")
         Log.i("question", "retrieved data type: $questionType")
         Firebase.firestore.collection("Questions")
@@ -132,7 +136,6 @@ class QuizActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {}
-
             }
         )
 
@@ -155,17 +158,30 @@ class QuizActivity : AppCompatActivity() {
             if(score > ((score / (questionList.size * 10)) * 100)){
                 // we'll change the view to show winner view
                 binding.wonAnim.visibility = View.VISIBLE
-            Toast.makeText(this, "You won a chance to spin and earn! 🥳", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "You won a chance to spin and earn! 🥳", Toast.LENGTH_SHORT).show()
                 FirebaseDatabase.getInstance().reference.child("PlayChance").child(FirebaseAuth.getInstance().uid!!).setValue(
                     spinChance + 1)
-//                startActivity(Intent(this, SpinFragment::class.java))
-//                finish()
+
+                                                      // redirecting to the home page once the user won the quiz game
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                Toast.makeText(this, "reached", Toast.LENGTH_SHORT).show()
+//                binding.wonAnim.visibility = View.GONE
+//                val transaction = supportFragmentManager.beginTransaction()
+//                transaction.replace(R.id.spin_containter, SpinFragment())
+//                transaction.addToBackStack(null)
+//                transaction.commit()
+//            },3000)
+
 
             }else{
                 // show sorry view
                 binding.lostAnim.visibility = View.VISIBLE
             Toast.makeText(this, "Better Luck Next Time! 🫡", Toast.LENGTH_LONG).show()
             }
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity(Intent(this, HomePage::class.java))
+                    finish()
+                },3000)
         }else{
             Log.i("question", "size: ${questionList.size} and ${currentQuestion}")
 
@@ -188,3 +204,5 @@ class QuizActivity : AppCompatActivity() {
 //                    startActivity(spinIntent)
 //                    finish()
 //                },3000)
+
+// problem statemen intro objective how did you encounter the problem

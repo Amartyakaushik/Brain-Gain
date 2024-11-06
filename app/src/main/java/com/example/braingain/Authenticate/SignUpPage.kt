@@ -62,9 +62,10 @@ class SignUpPage : AppCompatActivity() {
 //                            val intentLogin = (Intent(this,HomePage::class.java))
 //                            startActivity(intentLogin)
 //                            finish()
-                                val logInIntent = Intent(this, LogInPage::class.java)
-//                                val logInIntent = Intent(this, HomePage::class.java)
-                                startActivity(logInIntent)
+                                Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
+//                                val logInIntent = Intent(this, LogInPage::class.java)
+////                                val logInIntent = Intent(this, HomePage::class.java)
+//                                startActivity(logInIntent)
                         }
                             .addOnFailureListener { e ->
                                 Log.e("authentication", "Database Error: ${e.message}")
@@ -98,7 +99,12 @@ class SignUpPage : AppCompatActivity() {
 //                }
 //
 //            }
+
         }
+            binding.btnLogin.setOnClickListener {
+                startActivity(Intent(this,LogInPage::class.java))
+                finish()
+            }
     }
 
 //    override fun onStart() {

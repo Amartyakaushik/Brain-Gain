@@ -50,12 +50,28 @@ class LogInPage : AppCompatActivity() {
     }
 
 
+//    override fun onStart() {
+//        super.onStart()
+//        val fromSignUp = loginIntent.getBooleanExtra()
+//        if(FirebaseAuth.getInstance().currentUser != null){
+//            startActivity(Intent(this,HomePage::class.java))
+//            finish()
+//        }
+//    }
+
     override fun onStart() {
         super.onStart()
-        if(FirebaseAuth.getInstance().currentUser != null){
-            startActivity(Intent(this,HomePage::class.java))
+        // Check if navigating from Sign-Up page
+        val fromSignUp = intent.getBooleanExtra("fromSignUp", false)
+
+        if (!fromSignUp && FirebaseAuth.getInstance().currentUser != null) {
+            startActivity(Intent(this, HomePage::class.java))
             finish()
         }
+
+        // Remove the flag to avoid interference in future launches
+        intent.removeExtra("fromSignUp")
     }
+
 }
 

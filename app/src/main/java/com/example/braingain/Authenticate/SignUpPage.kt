@@ -102,7 +102,9 @@ class SignUpPage : AppCompatActivity() {
 
         }
             binding.btnLogin.setOnClickListener {
-                startActivity(Intent(this,LogInPage::class.java))
+                val intent = Intent(this, LogInPage::class.java)
+                intent.putExtra("fromSignUp",true)
+                startActivity(intent)
                 finish()
             }
     }

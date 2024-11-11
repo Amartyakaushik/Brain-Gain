@@ -54,8 +54,6 @@ class SignUpPage : AppCompatActivity() {
                         db.child("AuthenticatedUserList").child(auth.currentUser!!.uid).setValue(user)
                             .addOnSuccessListener {
 //                                startActivity(Intent(this,HomePage::class.java))
-
-
 //                            Toast.makeText(this,"dababase saved",Toast.LENGTH_SHORT).show()
 //                            LoginException(it.)
                         Log.e("authentication", "saving isSuccessful: , ${auth.currentUser?.uid}")
@@ -63,7 +61,12 @@ class SignUpPage : AppCompatActivity() {
 //                            startActivity(intentLogin)
 //                            finish()
                                 Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
-//                                val logInIntent = Intent(this, LogInPage::class.java)
+//                                startActivity(Intent(this, LogInPage::class.java))
+                                auth.signOut()
+                                val logInIntent = Intent(this, LogInPage::class.java)
+                                logInIntent.putExtra("fromSignUp",true)
+                                startActivity(logInIntent)
+                                finish()
 ////                                val logInIntent = Intent(this, HomePage::class.java)
 //                                startActivity(logInIntent)
                         }

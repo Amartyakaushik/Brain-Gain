@@ -102,23 +102,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="right">
+            android:gravity="right"
+            android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? "
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/black"/>
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login here"
+            android:paddingStart="3dp"
+            android:paddingEnd="8dp"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:background="@android:color/transparent"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 

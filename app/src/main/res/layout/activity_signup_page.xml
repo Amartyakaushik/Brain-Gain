@@ -30,7 +30,7 @@
         android:id="@+id/SignUp_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sing Up"
+        android:text="Sign Up"
         android:textColor="@color/white"
         android:textSize="26dp"
         android:fontFamily="@font/poppins_extrabold"

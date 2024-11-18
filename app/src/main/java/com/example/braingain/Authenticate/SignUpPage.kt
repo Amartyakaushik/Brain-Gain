@@ -120,3 +120,15 @@ class SignUpPage : AppCompatActivity() {
 //        }
 //    }
 }
+
+
+//        registration number - 12218153
+//        name - Amartya Kaushik
+//        section - RZ
+//        courseCode - CSE205
+//        scheduled CA date - 23rd Nov
+//
+//        Cocubes scheduled date - 23rd Nov
+
+
+

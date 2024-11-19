@@ -15,10 +15,10 @@ import com.google.firebase.auth.auth
 
 class categoryAdapter(
     var categoryList: ArrayList<cateogoryModelClass>,
-    var requireActivity: FragmentActivity
+    var requireActivity: FragmentActivity,
+    private val onClick : (cateogoryModelClass) -> Unit   // for handling clicks on categories
 ) : RecyclerView.Adapter<MyCategoryViewHolder>() {
     class MyCategoryViewHolder(var binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCategoryViewHolder {
@@ -37,9 +37,18 @@ class categoryAdapter(
             var intent = Intent(requireActivity, QuizActivity::class.java)
             intent.putExtra("categoryImg", dataList.catImage)
             intent.putExtra("questionType",dataList.catText)
+//            requireActivity.startActivity(intent)
+            holder.itemView.setOnClickListener{
+                onClick(dataList)
             requireActivity.startActivity(intent)
+            }
 
         }
+
+        // for handling clicks on categories
+//        holder.itemView.setOnClickListener{
+//            onClick(dataList)
+//        }
 
     }
 }

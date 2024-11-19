@@ -1,10 +1,14 @@
 package com.example.braingain.Fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.braingain.Adapter.categoryAdapter
@@ -24,7 +28,10 @@ import com.google.firebase.database.getValue
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
+    private lateinit var adapter : categoryAdapter
     private var categoryList = ArrayList<cateogoryModelClass>()
+    private var filteredCategoryList = ArrayList<cateogoryModelClass>()
+    private lateinit var filteredAdapter : categoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -75,8 +82,6 @@ class HomeFragment : Fragment() {
 
             }
         )
-
-
         // to retrieve total coin from
         FirebaseDatabase.getInstance().reference.child("CoinsEarned").child(FirebaseAuth.getInstance().uid!!).addValueEventListener(
             object : ValueEventListener{
@@ -91,7 +96,6 @@ class HomeFragment : Fragment() {
 
             }
         )
-
         return binding.root
     }
 
@@ -99,12 +103,75 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.categoryRv.layoutManager = GridLayoutManager(requireContext(),2)
-        var adapter = categoryAdapter(categoryList, requireActivity())
+        adapter = categoryAdapter(categoryList, requireActivity()){category ->
+            handleCategoryClick(category)
+        }
         binding.categoryRv.adapter = adapter
         binding.categoryRv.setHasFixedSize(true)
 
+
+        // to filter the category user will search for
+        // setUp filtered category Recycler View
+        binding.filteredCategoryRv.layoutManager = GridLayoutManager(requireContext(), 1)
+        filteredAdapter = categoryAdapter(filteredCategoryList, requireActivity()){category ->
+            handleCategoryClick(category)
+        }
+        binding.filteredCategoryRv.adapter = filteredAdapter
+
+        // Handle Search
+        binding.category.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                val query = s.toString().lowercase()
+                // check if the query matches any of the category
+                if(query.isNotEmpty()){
+                    filteredCategoryList.clear()
+                    filteredCategoryList.addAll(categoryList.filter {
+                        it.catText.lowercase().contains(query)
+                    })
+
+                    filteredAdapter.notifyDataSetChanged()
+                    binding.filteredCategoryRv.visibility = View.VISIBLE
+                    binding.categoryRv.visibility = View.GONE
+                }else{
+                    binding.filteredCategoryRv.visibility = View.GONE
+                    binding.categoryRv.visibility = View.VISIBLE
+                }
+                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+                    resetToOriginalList(adapter)
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+
+
+        })
+
+
         Log.e("authentication", "HomePage User Status:  ${Firebase.auth.currentUser?.uid}")
     }
+
+    private fun resetToOriginalList(adapter: categoryAdapter) {
+        binding.category.text.clear()
+        filteredCategoryList.clear()
+        binding.filteredCategoryRv.visibility = View.GONE
+        binding.categoryRv.visibility = View.VISIBLE
+
+        adapter.notifyDataSetChanged()
+    }
+
+
+    private fun handleCategoryClick(category: cateogoryModelClass) {
+        Toast.makeText(requireContext(), "Clicked on ${category.catText}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        filteredCategoryList.clear()
+        filteredCategoryList.addAll(categoryList)
+        adapter.notifyDataSetChanged()
+    }
+
     companion object {
     }
 }

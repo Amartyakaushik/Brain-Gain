@@ -82,4 +82,10 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//        filteredCategoryList.clear()
+//        filteredCategoryList.addAll(categoryList)
+//        adapter.notifyDataSetChanged()
+//    }
 }

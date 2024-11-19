@@ -136,9 +136,6 @@ class HomeFragment : Fragment() {
                     binding.filteredCategoryRv.visibility = View.GONE
                     binding.categoryRv.visibility = View.VISIBLE
                 }
-                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-                    resetToOriginalList(adapter)
-                }
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -146,6 +143,14 @@ class HomeFragment : Fragment() {
 
 
         })
+                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+                    if(binding.filteredCategoryRv.visibility == View.VISIBLE){
+                        resetToOriginalList(adapter)
+                    }else{
+//                        isEnable = false
+                        requireActivity().onBackPressed()
+                    }
+                }
 
 
         Log.e("authentication", "HomePage User Status:  ${Firebase.auth.currentUser?.uid}")
@@ -165,12 +170,6 @@ class HomeFragment : Fragment() {
         Toast.makeText(requireContext(), "Clicked on ${category.catText}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        filteredCategoryList.clear()
-        filteredCategoryList.addAll(categoryList)
-        adapter.notifyDataSetChanged()
-    }
 
     companion object {
     }

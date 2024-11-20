@@ -1,6 +1,10 @@
 package com.example.braingain.Fragments
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -109,19 +113,63 @@ class HistoryFragment : Fragment() {
             }
         )
 
-        // update the dp (fetch from firebase and assign to dp) each time view is created
+//   ######################################        // update the dp (fetch from firebase and assign to dp) each time view is created (avatar)
+//        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
+//            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("profilePicture").addValueEventListener(object : ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    val avatar = snapshot.getValue(Int::class.java)
+//                    avatar?.let {
+//                        binding.dp.setImageResource(it)
+//                    }
+//                }
+//                override fun onCancelled(error: DatabaseError) {}
+//
+//            })
+
+        loadUserProfile()
+
+
+        return binding.root
+    }
+
+
+    ////// ############################ Bitmap from firebase and assign to profile picture
+// retrieve bitMap from the database and assign to dp each time the view is created
+    private fun loadUserProfile() {
         FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("profilePicture").addValueEventListener(object : ValueEventListener{
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val avatar = snapshot.getValue(Int::class.java)
-                    avatar?.let {
-                        binding.dp.setImageResource(it)
+                    try {
+//                        val userData = snapshot.getValue(AuthenticationUserModel::class.java)
+//                        binding.name.text = userData?.name
+//                        binding.profileName.text = userData?.name
+//                        binding.profileEmail.text = userData?.email
+//                        binding.profilePassword.text = userData?.password
+//                        binding.profileAge.text = userData?.age.toString()
+//                        binding.profileCountry.text = "India"
+
+                        // Load and decode profile picture
+                        val base64Image = snapshot.child("profilePicture").getValue(String::class.java)
+                        base64Image?.let {
+                            val bitmap = base64ToBitmap(it)
+                            binding.dp.setImageBitmap(bitmap)
+                        }
+                    } catch (e: Exception) {
+                        Log.e("dpChanged", "Error loading user data: ${e.message}")
                     }
                 }
-                override fun onCancelled(error: DatabaseError) {}
 
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("dpChanged", "Failed to load profile: ${error.message}")
+                }
             })
-        return binding.root
+    }
+
+    // Convert Base64 string to Bitmap
+    private fun base64ToBitmap(base64String: String): Bitmap {
+        val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
     }
 
 }

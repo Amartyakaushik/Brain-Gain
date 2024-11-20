@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">BrainGain</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="debited"><font fgcolor="#fffff" > Debiteddd</font></string>
 </resources>

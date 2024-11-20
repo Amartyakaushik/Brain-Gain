@@ -200,13 +200,6 @@ class HomeFragment : Fragment() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     try {
-//                        val userData = snapshot.getValue(AuthenticationUserModel::class.java)
-//                        binding.name.text = userData?.name
-//                        binding.profileName.text = userData?.name
-//                        binding.profileEmail.text = userData?.email
-//                        binding.profilePassword.text = userData?.password
-//                        binding.profileAge.text = userData?.age.toString()
-//                        binding.profileCountry.text = "India"
 
                         // Load and decode profile picture
                         val base64Image = snapshot.child("profilePicture").getValue(String::class.java)

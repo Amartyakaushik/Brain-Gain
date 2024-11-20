@@ -1,5 +1,6 @@
 package com.example.braingain.Adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,9 +11,7 @@ import java.sql.Timestamp
 
 class historyAdapter(var historyList : ArrayList<historyModelClass>) :
     RecyclerView.Adapter<historyAdapter.MyHistoryViewHolder>() {
-    class MyHistoryViewHolder(var binding: HistoryItemListBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class MyHistoryViewHolder(var binding: HistoryItemListBinding) : RecyclerView.ViewHolder(binding.root) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHistoryViewHolder {
         return MyHistoryViewHolder(HistoryItemListBinding.inflate(LayoutInflater.from(parent.context),parent, false))
@@ -26,7 +25,14 @@ class historyAdapter(var historyList : ArrayList<historyModelClass>) :
         var timeStamp = Timestamp(historyList.get(position).timeAndDate.toLong())
         holder.binding.time.text = Date(timeStamp.time).toString()
         // to inform if the money is debited or credited
-        holder.binding.status.text = if(historyList.get(position).isWithdrawal) { "Debited"}else{ "Credited"}
+        if(historyList.get(position).isWithdrawal) {
+            holder.binding.status.text = "Debited"
+            holder.binding.status.setTextColor(Color.RED)
+
+        }else{
+            holder.binding.status.text = "Credited"
+            holder.binding.status.setTextColor(Color.GREEN)
+        }
         holder.binding.coinCount.text = historyList[position].coin
 
     }

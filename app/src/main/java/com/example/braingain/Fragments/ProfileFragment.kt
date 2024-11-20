@@ -1,5 +1,7 @@
 package com.example.braingain.Fragments
 
+//import com.google.firebase.auth.RA
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.braingain.Authenticate.LogInPage
 import com.example.braingain.ModelClass.AuthenticationUserModel
+import com.example.braingain.R
 import com.example.braingain.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -19,8 +22,23 @@ import com.google.firebase.database.getValue
 class ProfileFragment : Fragment() {
     private lateinit var binding : FragmentProfileBinding
     private var isExpanded = false
+    private val db = FirebaseDatabase.getInstance().reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        binding.dp.setImageResource(avatar)
+        // update the dp (fetch from firebase and assign to dp) each time view is created
+        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("profilePicture").addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val avatar = snapshot.getValue(Int::class.java)
+                    avatar?.let {
+                        binding.dp.setImageResource(it)
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
     }
 
     override fun onCreateView(
@@ -79,8 +97,40 @@ class ProfileFragment : Fragment() {
 //            startActivity(intent)
         }
 
+        binding.dp.setOnClickListener{
+            showAvatarSelectionDialog()
+        }
+
+
         return binding.root
     }
+        fun updateProfilePicture(avt: Int) {
+            binding.dp.setImageResource(avt)
+            FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                .child("profilePicture").setValue(avt)
+        }
+
+        // changing the dp and update it in the database
+        fun showAvatarSelectionDialog(){
+            val avatars = arrayOf(
+                R.drawable.dp,
+                R.drawable.avt_boy,
+                R.drawable.avt_girl,
+                R.drawable.avt_boy,
+                R.drawable.dp
+            )
+        val avtDrawables = avatars.map { resources.getDrawable(it, null) }
+            val avtName = arrayOf("avt1","avt2","avt3","avt4","avt5")
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Choose your Avatar")
+                .setItems(avtName){_, which ->
+                    updateProfilePicture(avatars[which])
+                }
+                .show()
+        }
+
+
+
 
 //    override fun onResume() {
 //        super.onResume()

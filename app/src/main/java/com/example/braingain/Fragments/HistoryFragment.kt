@@ -50,7 +50,6 @@ class HistoryFragment : Fragment() {
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
                     }
-
                 }
             )
 
@@ -87,17 +86,12 @@ class HistoryFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val userData = snapshot.getValue<AuthenticationUserModel>()
 //                    userData?.let {
-//
 //                    binding.name.text = it.name
 //                    binding.profilePassword.text = it.password
-
 //                    }
                     binding.userName.text = userData?.name
-
                 }
-
                 override fun onCancelled(error: DatabaseError) {}
-
             }
         )
 
@@ -110,11 +104,23 @@ class HistoryFragment : Fragment() {
                         binding.withdrawalAmount.text = currentCoin.toString()
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {}
 
             }
         )
+
+        // update the dp (fetch from firebase and assign to dp) each time view is created
+        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("profilePicture").addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val avatar = snapshot.getValue(Int::class.java)
+                    avatar?.let {
+                        binding.dp.setImageResource(it)
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
         return binding.root
     }
 

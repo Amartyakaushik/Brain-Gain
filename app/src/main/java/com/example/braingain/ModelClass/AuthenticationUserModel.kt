@@ -5,6 +5,7 @@ class AuthenticationUserModel {
     var age = 0
     var email = ""
     var password = ""
+//    var image = 0
 
     constructor()
     constructor(name: String, age: Int, email: String, password: String) {
@@ -12,6 +13,7 @@ class AuthenticationUserModel {
         this.age = age
         this.email = email
         this.password = password
+//        this.image = image
     }
 
 }

@@ -96,6 +96,19 @@ class HomeFragment : Fragment() {
 
             }
         )
+
+        // update the dp (fetch from firebase and assign to dp) each time view is created
+        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("profilePicture").addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val avatar = snapshot.getValue(Int::class.java)
+                    avatar?.let {
+                        binding.dp.setImageResource(it)
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
         return binding.root
     }
 
@@ -171,6 +184,5 @@ class HomeFragment : Fragment() {
     }
 
 
-    companion object {
-    }
+    companion object {}
 }

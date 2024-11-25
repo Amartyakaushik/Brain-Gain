@@ -37,7 +37,7 @@ class historyAdapter(var historyList : ArrayList<historyModelClass>) :
         }else{
             holder.binding.status.text = "Credited"
 //            holder.binding.status.setTextColor(Color.GREEN)
-        holder.binding.coinCount.text = "-" + historyList[position].coin
+        holder.binding.coinCount.text = "+ " + historyList[position].coin
             holder.binding.coinCount.setTextColor(Color.GREEN)
             holder.binding.withdrawalStatus.setImageResource(R.drawable.ic_credit)
         }

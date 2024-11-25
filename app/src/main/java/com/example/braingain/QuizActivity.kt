@@ -1,9 +1,12 @@
 package com.example.braingain
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -27,10 +30,14 @@ private lateinit var binding : ActivityQuizBinding
 private lateinit var questionList : ArrayList<QuestionModelClass>
     var currentQuestion = 0
     var spinChance : Long = 0L
+
 class QuizActivity : AppCompatActivity() {
+
+    private lateinit var db : FirebaseDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         // catadp
@@ -139,8 +146,27 @@ class QuizActivity : AppCompatActivity() {
             }
         )
 
+        // fetching dp from database and assign to the profile picture
+        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val base64Image = snapshot.child("profilePicture").getValue(String::class.java)
+                    base64Image?.let {
+                        val bitmap = base64ToBitmap(it)
+                        binding.dp.setImageBitmap(bitmap)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
     }
 
+    fun base64ToBitmap(base64String: String) : Bitmap {
+        val decodeByte = Base64.decode(base64String, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodeByte, 0 , decodeByte.size)
+    }
     private fun nextQuestionAndUpdateAnswer(option: String?) {
 //        if(option.equals(questionList.get(currentQuestion).ans)){
 //

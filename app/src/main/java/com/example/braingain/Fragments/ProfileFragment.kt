@@ -71,7 +71,8 @@ class ProfileFragment : Fragment() {
         }
 
         // for assigning values to the info field by retrieving data from the firebase store
-        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList").child(FirebaseAuth.getInstance().currentUser!!.uid).addValueEventListener(
+        FirebaseDatabase.getInstance().reference.child("AuthenticatedUserList")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).addValueEventListener(
             object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var userData = snapshot.getValue<AuthenticationUserModel>()
@@ -150,6 +151,7 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == PICK_IMAGE_REQUEST &&  resultCode == RESULT_OK && data != null && data.data != null){
+//            val color = Color
             try {
                 val imgUri = data.data
                 val inputStream = requireContext().contentResolver.openInputStream(imgUri!!)

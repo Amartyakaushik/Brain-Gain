@@ -24,7 +24,7 @@
             android:id="@+id/lo_dp"
             android:layout_width="112dp"
             android:layout_height="112dp"
-            app:cardCornerRadius="50dp"
+            app:cardCornerRadius="43dp"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,6 @@
             android:layout_width="112dp"
             android:layout_height="112dp"
             android:clickable="true"
-            android:src="@drawable/dp"
             android:contentDescription="Profile image"
             android:focusable="true"
             android:scaleType="centerCrop"/>

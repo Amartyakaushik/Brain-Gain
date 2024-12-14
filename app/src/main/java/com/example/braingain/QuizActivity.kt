@@ -163,6 +163,7 @@ class QuizActivity : AppCompatActivity() {
 
     }
 
+    // convert the base64String fetched from the database to Bitmap
     fun base64ToBitmap(base64String: String) : Bitmap {
         val decodeByte = Base64.decode(base64String, Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(decodeByte, 0 , decodeByte.size)

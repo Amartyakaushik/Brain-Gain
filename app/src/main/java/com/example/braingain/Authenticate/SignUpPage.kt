@@ -49,30 +49,38 @@ class SignUpPage : AppCompatActivity() {
                     .addOnCompleteListener {
                         Log.i("authentication", "let's check: ${it.exception?.localizedMessage}, ${auth.currentUser?.uid}")
                     if(it.isSuccessful){
-                        Log.e("authentication", "isSuccessful: ${it.exception?.localizedMessage}, ${auth.currentUser?.uid}")
-                        var user = AuthenticationUserModel(binding.name.text.toString(), binding.age.text.toString().toInt(), binding.email.text.toString(), binding.password.text.toString())
-                        db.child("AuthenticatedUserList").child(auth.currentUser!!.uid).setValue(user)
-                            .addOnSuccessListener {
+                        auth.currentUser!!.sendEmailVerification()
+                            .addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    Log.e("authentication", "isSuccessful: ${it.exception?.localizedMessage}, ${auth.currentUser?.uid}")
+                                    var user = AuthenticationUserModel(binding.name.text.toString(), binding.age.text.toString().toInt(), binding.email.text.toString(), binding.password.text.toString())
+                                    db.child("AuthenticatedUserList").child(auth.currentUser!!.uid).setValue(user)
+                                        .addOnSuccessListener {
 //                                startActivity(Intent(this,HomePage::class.java))
 //                            Toast.makeText(this,"dababase saved",Toast.LENGTH_SHORT).show()
 //                            LoginException(it.)
-                        Log.e("authentication", "saving isSuccessful: , ${auth.currentUser?.uid}")
+                                            Log.e("authentication", "saving isSuccessful: , ${auth.currentUser?.uid}")
 //                            val intentLogin = (Intent(this,HomePage::class.java))
 //                            startActivity(intentLogin)
 //                            finish()
-                                Toast.makeText(this, "Registered", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this, "User Registered Successfully. Please verify your email id through the link sent to your email.", Toast.LENGTH_SHORT).show()
 //                                startActivity(Intent(this, LogInPage::class.java))
-                                auth.signOut()
-                                val logInIntent = Intent(this, LogInPage::class.java)
-                                logInIntent.putExtra("fromSignUp",true)
-                                startActivity(logInIntent)
-                                finish()
+                                            auth.signOut()
+                                            val logInIntent = Intent(this, LogInPage::class.java)
+                                            logInIntent.putExtra("fromSignUp",true)
+                                            startActivity(logInIntent)
+                                            finish()
 ////                                val logInIntent = Intent(this, HomePage::class.java)
 //                                startActivity(logInIntent)
-                        }
-                            .addOnFailureListener { e ->
-                                Log.e("authentication", "Database Error: ${e.message}")
-                                Toast.makeText(this, "Database Error: ${e.message}", Toast.LENGTH_LONG).show()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            Log.e("authentication", "Database Error: ${e.message}")
+                                            Toast.makeText(this, "Database Error: ${e.message}", Toast.LENGTH_LONG).show()
+                                        }
+
+                                }else{
+                                    Toast.makeText(this, "userVerification failed", Toast.LENGTH_SHORT).show()
+                                }
                             }
                     }else{
                         Toast.makeText(this,it.exception?.localizedMessage,Toast.LENGTH_LONG).show()

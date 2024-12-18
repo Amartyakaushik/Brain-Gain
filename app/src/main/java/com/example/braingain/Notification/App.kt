@@ -13,11 +13,15 @@ class App:Application() {
         super.onCreate()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel1 = NotificationChannel(CHANNEL_ID1, "Phone ka", NotificationManager.IMPORTANCE_HIGH)
+            val channel1 = NotificationChannel(CHANNEL_ID1, "Phone ka re", NotificationManager.IMPORTANCE_HIGH)
             channel1.description = "This is my High priority Notification"
+
+            val channel2 = NotificationChannel(CHANNEL_ID2, "Email na", NotificationManager.IMPORTANCE_DEFAULT)
+            channel2.description = "This is my low priority Notification"
 
             val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel1)
+            manager.createNotificationChannel(channel2)
         }
     }
 }

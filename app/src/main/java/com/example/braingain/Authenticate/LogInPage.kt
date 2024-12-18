@@ -32,8 +32,12 @@ class LogInPage : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            startActivity(Intent(this, HomePage::class.java))
-                            finish()
+                            if(auth.currentUser!!.isEmailVerified){
+                                startActivity(Intent(this, HomePage::class.java))
+                                finish()
+                            }else{
+                                Toast.makeText(this, "Please verify your email.", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
                             Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
                             Log.e("SignIn", "Sign-In Error: ${it.exception?.message}")
@@ -65,8 +69,10 @@ class LogInPage : AppCompatActivity() {
         val fromSignUp = intent.getBooleanExtra("fromSignUp", false)
 
         if (!fromSignUp && FirebaseAuth.getInstance().currentUser != null) {
-            startActivity(Intent(this, HomePage::class.java))
-            finish()
+            if(auth.currentUser!!.isEmailVerified){
+                startActivity(Intent(this, HomePage::class.java))
+                finish()
+            }
         }
 
         // Remove the flag to avoid interference in future launches

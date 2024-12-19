@@ -63,7 +63,7 @@ class SignUpPage : AppCompatActivity() {
 //                            val intentLogin = (Intent(this,HomePage::class.java))
 //                            startActivity(intentLogin)
 //                            finish()
-                                            Toast.makeText(this, "User Registered Successfully. Please verify your email id through the link sent to your email.", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(this, "User Registered Successfully. Please verify your email id through the link sent to your email.`", Toast.LENGTH_SHORT).show()
 //                                startActivity(Intent(this, LogInPage::class.java))
                                             auth.signOut()
                                             val logInIntent = Intent(this, LogInPage::class.java)

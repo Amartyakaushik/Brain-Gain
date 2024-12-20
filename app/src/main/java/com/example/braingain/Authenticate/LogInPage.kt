@@ -24,6 +24,7 @@ class LogInPage : AppCompatActivity() {
         binding.animLogIn.playAnimation()
         binding.logInBtn.setOnClickListener {
             val email = binding.email.text.toString()
+
             val password = binding.password.text.toString()
 
             if (email.isEmpty() || password.isEmpty()) {
@@ -80,4 +81,4 @@ class LogInPage : AppCompatActivity() {
     }
 
 }
-
+// nothing just added some more feature to ensure the user is authorizing with the correct email only by verifying the email through the verification link sent on the email

@@ -208,7 +208,7 @@ class QuizActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this, HomePage::class.java))
                     finish()
-                },3000)
+                },1500)
         }else{
             Log.i("question", "size: ${questionList.size} and ${currentQuestion}")
 

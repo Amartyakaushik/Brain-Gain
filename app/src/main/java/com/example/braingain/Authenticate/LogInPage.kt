@@ -21,11 +21,22 @@ class LogInPage : AppCompatActivity() {
 
 //        binding.animLogIn.visibility = View.VISIBLE
 //        binding.animLogIn.setAnimation(R.raw.you_won)
+
+        // Shared preference -> ( to store the username and show when the user navigate back to the application or when the logout
+        val editor = getSharedPreferences("LOGIN_AUTH_DETAIL", MODE_PRIVATE)
+        binding.email.setText(editor.getString("userName",null))
+
         binding.animLogIn.playAnimation()
         binding.logInBtn.setOnClickListener {
-            val email = binding.email.text.toString()
 
+            val email = binding.email.text.toString()
             val password = binding.password.text.toString()
+
+            // Shared preference ( 31st dec 2024)
+            val editor = getSharedPreferences("LOGIN_AUTH_DETAIL", MODE_PRIVATE).edit()
+            editor.putString("userName",email)
+            editor.apply()
+
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -52,6 +63,9 @@ class LogInPage : AppCompatActivity() {
         binding.signUpBtn.setOnClickListener {
             startActivity(Intent(this, SignUpPage::class.java))
         }
+
+
+
     }
 
 
